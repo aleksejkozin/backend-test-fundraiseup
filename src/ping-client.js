@@ -18,7 +18,7 @@ class HTTPError extends Error {
  * Promise-based wrapper for the http(s).request
  * @param {http.RequestOptions | string | http.URL} options - The options for the request.
  * @param {*} [data] - The data to send.
- * @returns {Promise<string>} - The response.
+ * @returns {Promise<Buffer>} - The response.
  */
 const request = (options, data) =>
   new Promise((resolve, reject) => {
