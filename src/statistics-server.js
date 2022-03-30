@@ -41,10 +41,15 @@ const onPostData = async (req, res) => {
 
   /** @type {PingData} */
   const pingData = JSON.parse((await readBody(req)).toString())
-  assert(pingData.date)
-  assert(pingData.pingId)
-  assert(pingData.deliveryAttempt)
-  assert(pingData.responseTime)
+  const assertPositiveNumber = (obj, key) =>
+    assert(
+      obj && typeof obj[key] === 'number' && obj[key] >= 0,
+      `Expected ${key} to be a positive number, got ${obj[key]}`
+    )
+  assertPositiveNumber(pingData, 'date')
+  assertPositiveNumber(pingData, 'pingId')
+  assertPositiveNumber(pingData, 'deliveryAttempt')
+  assertPositiveNumber(pingData, 'responseTime')
 
   const OK_CHANCE = 0.6
   const ERROR_CHANCE = 0.2
